@@ -1,0 +1,191 @@
+" use command below to install vim plug
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+
+" surround
+Plug 'git://github.com/tpope/vim-surround.git'
+" commentary
+Plug 'git://github.com/tpope/vim-commentary.git'
+" indent-object
+Plug 'https://github.com/michaeljsmith/vim-indent-object.git'
+" happy_hacking colorscheme
+Plug 'https://github.com/YorickPeterse/happy_hacking.vim.git'
+" CtrlP file search plugin - a faster alternative is fzf
+"Plug 'https://github.com/kien/ctrlp.vim.git'
+" smooth scroller
+Plug 'https://github.com/terryma/vim-smooth-scroll.git'
+" Goyo distraction free writing plugin
+Plug 'https://github.com/junegunn/goyo.vim.git'
+" Thesaurus query plugin for synonyms
+Plug 'ron89/thesaurus_query.vim'
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+call plug#end()"
+
+
+" GENERAL SETTINGS
+" set happy_hacking colorcheme
+colorscheme happy_hacking
+" open new splits below and to the right
+set splitbelow
+set splitright
+" set relative numbering
+set nu
+" use tabs instead of split windows
+set switchbuf=usetab,newtab
+" show command typed thus far in the bottom row
+set showcmd
+" scrolloff
+set scrolloff=5
+" start searching while typing
+set incsearch
+" disable command history window
+noremap q: <NOP>
+
+
+" KEY MAPPINGS
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+" remap leader
+let mapleader = "\<Space>"
+" ctrl+s for saving in normal and insert modes
+noremap <silent> <C-S> :update<CR>
+vnoremap <silent> <C-S> <C-C>:update<CR>
+inoremap <silent> <C-S> <C-O>:update<CR>
+" reminder to use <C-s> instead of :w (this works only for :W (typo))
+command! W echoe "use <C-s>"
+command! Wq wq
+command! WQ wq
+command! Q q
+" prevent annoying typos
+nnoremap <S-s> :echoe "S disabled"<CR>
+" maintain selection while indenting
+vnoremap < <gv
+vnoremap > >gv
+" autocomplete filenames when opening files with e:
+set wildmode=longest,list,full
+set wildmenu
+" buffer navigation
+nnoremap <leader>k :bprevious<CR>
+nnoremap <leader>j :bnext<CR>
+nmap <Leader>x :bd<CR> 
+" split navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+" quickly edit vimrc 
+nnoremap <leader>e :e $MYVIMRC<CR>
+"go to the end of last line of paragraph
+nnoremap g} }gel
+nnoremap g{ {w
+" map search to be quciker in finnish keyboard layout (Shift+7 is horrendous)
+nnoremap <leader>f /
+onoremap <leader>f /
+
+
+" SPELL CHECKING
+" toggle VIM's spell checking
+nnoremap <leader>s :setlocal spell! spelllang=en_us<CR>
+hi SpellBad cterm=underline
+hi SpellCap cterm=underline 
+hi SpellRare cterm=underline 
+hi SpellLocal cterm=underline 
+highlight SpellBad ctermfg=Red term=Reverse guisp=None gui=undercurl ctermbg=Red 
+highlight SpellCap ctermfg=Green term=Reverse guisp=None gui=undercurl ctermbg=Cyan
+highlight SpellLocal ctermfg=Cyan term=Underline guisp=None gui=undercurl ctermbg=Green 
+highlight SpellRare ctermfg=Magenta term=underline guisp=None gui=undercurl ctermbg=White 
+
+
+" MACROS 
+" this should be somehere in bash specific configurations
+let @v = 'Ivariable=$lys$)0'
+
+
+" ABBREVIATIONS
+abbrev shebang #!/usr/bin/env bash
+abbrev lipsum Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+
+
+" SMOOTH SCROLL 
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 2, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 2, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+
+" GOYO SETTINGS
+function! s:goyo_enter()
+  " Smaller top and bottom margins!
+  set noshowcmd
+  set scrolloff=999
+endfunction
+
+function! s:goyo_leave()
+  set showcmd
+  set scrolloff=5
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+
+" THESAURUS QUERY
+" Tip: use <C-x><C-u> to autocomplete using Thesaurus in insert mode
+nnoremap <Leader>ct :ThesaurusQueryReplaceCurrentWord<CR>
+vnoremap <Leader>ct y:ThesaurusQueryReplace <C-r>"<CR>
+
+
+" FZF
+nnoremap <silent> <C-p> :Files <CR>
+
+
+" GENERAL PROGRAMMING
+" enable indentation by filetype
+filetype plugin indent on
+" enable syntax highlighting
+syntax on
+" set colorcolumn at 79 charcters
+" highlight ColorColumn ctermbg=238 guibg=#2c2d27
+" let &colorcolumn=join(range(81,999),",")
+" use 4 spaces instead of tabs
+set tabstop=4
+" indent with 4 spaces instead of 8
+set shiftwidth=4
+
+
+" CUSTOM / SEARCH FUNCTIONALITY
+" toggle different modes with f4
+nnoremap <silent> <F4> :call <SID>SearchMode()<CR>
+function s:SearchMode()
+  if !exists('s:searchmode') || s:searchmode == 0
+    echo 'Search next: scroll hit to middle if not on same page'
+    nnoremap <silent> n n:call <SID>MaybeMiddle()<CR><BS><Space>
+    nnoremap <silent> N N:call <SID>MaybeMiddle()<CR><BS><Space>
+    let s:searchmode = 1
+  elseif s:searchmode == 1
+    echo 'Search next: scroll hit to middle'
+    nnoremap n nzz<BS><Space>
+    nnoremap N Nzz<BS><Space>
+    let s:searchmode = 2
+  else
+    echo 'Search next: normal'
+    nunmap n
+    nunmap N
+    let s:searchmode = 0
+  endif
+endfunction
+
+" If cursor is in first or last line of window, scroll to middle line.
+function s:MaybeMiddle()
+  if winline() == 1 || winline() == winheight(0)
+    normal! zz
+  endif
+endfunction
+
