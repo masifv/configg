@@ -1,0 +1,16 @@
+#!/usr/bin/env bash 
+
+current_num=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num' | cut -d"\"" -f2)
+
+if [ $current_num == -1 ]; 
+then 
+	current_num=10
+fi
+
+active_win_name=$(xdotool getwindowname $(xdotool getactivewindow) | awk '{print $1;}')
+
+#echo "current num: $current_num"
+#echo "active win name: $active_win_name"
+
+i3-msg "rename workspace to \"$current_num: $active_win_name |\""
+
