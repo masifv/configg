@@ -1,0 +1,24 @@
+#!/usr/bin/env bash 
+
+# vim
+mkdir -p ~/.vim
+ln -s ~/.vim/vimrc ~/.vim/vimrc
+
+#zsh
+ln -s ~/.zshrc.local
+
+# ranger
+mkdir -p ~/.trash
+mkdir -p ~/.config/ranger
+touch ~/.config/rangerdir
+mv ~/.config/ranger/commands.py ~/.config/ranger/commands.py_bak && ln -s $(pwd)/.config/ranger/commands.py ~/.config/ranger/commands.py
+mv ~/.config/ranger/rc.conf ~/.config/ranger/rc.conf_bak && ln -s $(pwd)/.config/ranger/rc.conf ~/.config/ranger/rc.conf
+mv ~/.config/ranger/rifle.conf ~/.config/ranger/rifle.conf_bak && ln -s $(pwd)/.config/ranger/rifle.conf ~/.config/ranger/rifle.conf
+
+# i3
+mkdir -p ~/.i3/scripts
+mv ~/.i3status.conf ~/.i3status.conf_bak && ln -s $(pwd)/.i3status.conf ~/.i3status.conf
+mv ~/.i3/config ~/.i3/config_bak && ln -s $(pwd)/.i3/config ~/.i3/config
+mv ~/.i3/scripts/ws_switcher  ~/.i3/scripts/ws_switcher_bak && ln -s $(pwd)/.i3/scripts/ws_switcher ~/.i3/scripts/ws_switcher 
+mv ~/.config/compton.conf ~/.config/compton.conf_bak && ln -s $(pwd)/.config/compton.conf ~/.config/compton.conf
+
