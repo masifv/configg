@@ -2,10 +2,10 @@
 
 # vim
 mkdir -p ~/.vim
-ln -s ~/.vim/vimrc ~/.vim/vimrc
+mv ~/.vim/vimrc ~/.vim/vimrc_bak && ln -s $(pwd)/.vim/vimrc ~/.vim/vimrc
 
 #zsh
-ln -s ~/.zshrc.local
+mv ~/.zshrc.local ~/.zshrc.local_bak && ln -s $(pwd)/.zshrc.local ~/.zshrc.local
 
 # ranger
 mkdir -p ~/.trash
