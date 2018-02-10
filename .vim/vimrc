@@ -22,8 +22,11 @@ Plug 'https://github.com/junegunn/goyo.vim.git'
 " Thesaurus query plugin for synonyms
 Plug 'ron89/thesaurus_query.vim'
 " fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+" CtrlP file search plugin - a faster alternative is fzf
+Plug 'https://github.com/kien/ctrlp.vim.git'
+
 call plug#end()"
 
 
@@ -143,7 +146,19 @@ vnoremap <Leader>ct y:ThesaurusQueryReplace <C-r>"<CR>
 
 
 " FZF
-nnoremap <silent> <C-p> :Files <CR>
+" nnoremap <silent> <C-p> :Files <CR>
+" CtrlP?
+let g:ctrlp_max_height = 25
+let g:ctrlp_cmd = 'CtrlPLastMode'
+" Use cache for CtrlP
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" use faster ag for searching
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+
+
 
 " ASYNCRUN
 augroup vimrc
