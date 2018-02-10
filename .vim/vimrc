@@ -91,6 +91,8 @@ nnoremap g{ {w
 " map search to be quciker in finnish keyboard layout (Shift+7 is horrendous)
 nnoremap <leader>f /
 onoremap <leader>f /
+" use F3 to quickly count document/selection words, lines and characters
+:map <F3> :w ! echo "Lines, words, characters: $(wc -lwm)"<CR>
 
 
 " SPELL CHECKING
