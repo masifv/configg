@@ -13,8 +13,8 @@ Plug 'git://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/michaeljsmith/vim-indent-object.git'
 " happy_hacking colorscheme
 Plug 'https://github.com/YorickPeterse/happy_hacking.vim.git'
-" CtrlP file search plugin - a faster alternative is fzf
-"Plug 'https://github.com/kien/ctrlp.vim.git'
+" AsyncRun
+Plug 'https://github.com/skywind3000/asyncrun.vim.git'
 " smooth scroller
 Plug 'https://github.com/terryma/vim-smooth-scroll.git'
 " Goyo distraction free writing plugin
@@ -43,8 +43,8 @@ set showcmd
 set scrolloff=5
 " start searching while typing
 set incsearch
-" disable command history window
-noremap q: <NOP>
+" disable command history window (quickfix)
+" noremap q: <NOP>
 
 
 " KEY MAPPINGS
@@ -144,6 +144,14 @@ vnoremap <Leader>ct y:ThesaurusQueryReplace <C-r>"<CR>
 
 " FZF
 nnoremap <silent> <C-p> :Files <CR>
+
+" ASYNCRUN
+augroup vimrc
+    autocmd QuickFixCmdPost * botright copen 8
+augroup END
+
+" noremap <C-c> :cclose<CR>
+noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
 
 
 " GENERAL PROGRAMMING
