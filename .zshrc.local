@@ -37,6 +37,8 @@ alias regemail="echo '[^[:space:]]+@[^[:space:]]+'"
 alias regip="echo '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'"
 alias ranger='ranger --choosedir=$HOME/.config/rangerdir; LASTDIR=`cat $HOME/.config/rangerdir`; cd "$LASTDIR"'
 alias rg='ranger --choosedir=$HOME/.config/rangerdir; LASTDIR=`cat $HOME/.config/rangerdir`; cd "$LASTDIR"'
+alias R="R --quiet"
+alias v="vim"
 # bumblebee aliases
 alias nvidia-settings='primusrun nvidia-settings -c :8'
 # pacman typo aliases
