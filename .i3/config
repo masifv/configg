@@ -39,7 +39,7 @@ set $right l
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id xfce4-terminal
+bindsym $mod+Return exec --no-startup-id sakura
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -265,7 +265,7 @@ bindsym Control+section exec --no-startup-id qutebrowser
 # bindsym Shift+$mod+s exec --no-startup-id "thunar ~/Dropbox"
 
 # ranger
-bindsym Shift+$mod+f exec --no-startup-id xfce4-terminal -x ranger
+bindsym Shift+$mod+f exec --no-startup-id sakura -e ranger
 
 # bing wallpaper
 bindsym Control+Shift+Mod1+b exec --no-startup-id bing-wallpaper
