@@ -48,6 +48,10 @@ set scrolloff=5
 set incsearch
 " disable command history window (quickfix)
 " noremap q: <NOP>
+" Enable mouse
+set mouse=a
+" highlight cursor
+" set cursorline
 
 
 " KEY MAPPINGS
@@ -102,10 +106,10 @@ hi SpellBad cterm=underline
 hi SpellCap cterm=underline 
 hi SpellRare cterm=underline 
 hi SpellLocal cterm=underline 
-highlight SpellBad ctermfg=Red term=Reverse guisp=None gui=undercurl ctermbg=Red 
-highlight SpellCap ctermfg=Green term=Reverse guisp=None gui=undercurl ctermbg=Cyan
-highlight SpellLocal ctermfg=Cyan term=Underline guisp=None gui=undercurl ctermbg=Green 
-highlight SpellRare ctermfg=Magenta term=underline guisp=None gui=undercurl ctermbg=White 
+highlight SpellBad ctermfg=Red term=Reverse guisp=bg gui=undercurl ctermbg=Red
+highlight SpellCap ctermfg=Green term=Reverse guisp=bg gui=undercurl ctermbg=Cyan
+highlight SpellLocal ctermfg=Cyan term=Underline guisp=bg gui=undercurl ctermbg=Green
+highlight SpellRare ctermfg=Magenta term=underline guisp=bg gui=undercurl ctermbg=White
 
 
 " MACROS 
@@ -213,4 +217,10 @@ function s:MaybeMiddle()
     normal! zz
   endif
 endfunction
+
+" MARKDOWN
+" Render markdown files in the background and refresh mupdf
+autocmd Filetype markdown noremap <F5> :AsyncRun -raw=1 @ pandoc <C-r>% -o <C-r>%.pdf && pkill -1 mupdf<CR><CR>
+autocmd Filetype rmd noremap <F5> :AsyncRun -raw=1 @ Rscript -e "require('rmarkdown'); render('<C-r>%')" && pkill -1 mupdf<CR><CR>
+ 
 
