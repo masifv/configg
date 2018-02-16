@@ -31,10 +31,13 @@ call plug#end()"
 
 
 " GENERAL SETTINGS
+" screen-256color had ctrl+left & ctrl+right mapped to deleting 5 rows
+set term=xterm-256color
 " set happy_hacking colorcheme
 colorscheme happy_hacking
-" open new splits below and to the right
+" open new splits below
 set splitbelow
+" open new splits to the right
 set splitright
 " set relative numbering
 set nu
@@ -59,6 +62,8 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
+nnoremap <PageUp> :echoe ""<CR>
+nnoremap <PageDown> :echoe ""<CR>
 " remap leader
 let mapleader = "\<Space>"
 " ctrl+s for saving in normal and insert modes
