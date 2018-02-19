@@ -55,6 +55,8 @@ set incsearch
 set mouse=a
 " highlight cursor
 " set cursorline
+" disable search highlighting by default
+set nohlsearch
 
 
 " KEY MAPPINGS
@@ -189,6 +191,7 @@ syntax on
 " highlight ColorColumn ctermbg=238 guibg=#2c2d27
 " let &colorcolumn=join(range(81,999),",")
 " use 4 spaces instead of tabs
+set expandtab
 set tabstop=4
 " indent with 4 spaces instead of 8
 set shiftwidth=4
