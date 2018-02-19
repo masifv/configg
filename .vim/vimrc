@@ -64,8 +64,10 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
-nnoremap <PageUp> :echoe ""<CR>
-nnoremap <PageDown> :echoe ""<CR>
+nnoremap <PageUp> <NOP>
+nnoremap <PageDown> <NOP>
+inoremap <PageUp> <NOP>
+inoremap <PageDown> <NOP>
 " remap leader
 let mapleader = "\<Space>"
 " ctrl+s for saving in normal and insert modes
