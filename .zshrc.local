@@ -12,8 +12,18 @@ function cd() {
     builtin cd "${new_directory}" && ls
 }
 
+
+_lll() {
+    if [[ $# -eq 0 ]]; then
+        find $(pwd) -maxdepth 1 -printf "%h/%f\n"
+    else
+        find $1 -maxdepth 1 -printf "%h/%f\n"
+    fi
+}
+
 alias l="ls -lh"
 alias ll="ls -lha"
+alias lll="_lll"
 alias cd..="cd .."
 alias c="echo 'qalc'; qalc"
 alias grep="grep --color=auto"
