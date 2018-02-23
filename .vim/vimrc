@@ -26,6 +26,10 @@ Plug 'ron89/thesaurus_query.vim'
 "Plug 'junegunn/fzf.vim'
 " CtrlP file search plugin - a faster alternative is fzf
 Plug 'https://github.com/kien/ctrlp.vim.git'
+" Repeat
+Plug 'https://github.com/tpope/vim-repeat.git'
+" ALE
+Plug 'https://github.com/w0rp/ale.git'
 
 call plug#end()"
 
@@ -101,9 +105,6 @@ nnoremap <leader>e :e $MYVIMRC<CR>
 "go to the end of last line of paragraph
 nnoremap g} }gel
 nnoremap g{ {w
-" map search to be quciker in finnish keyboard layout (Shift+7 is horrendous)
-nnoremap <leader>f /
-onoremap <leader>f /
 " use F3 to quickly count document/selection words, lines and characters
 :map <F3> :w ! echo "Lines, words, characters: $(wc -lwm)"<CR>
 
@@ -124,7 +125,7 @@ highlight SpellRare ctermfg=Magenta term=underline guisp=bg gui=undercurl ctermb
 " MACROS 
 " this should be somehere in bash specific configurations
 let @v = 'Ivariable=$lys$)0'
-
+let @p = 'Iprintlys$)0'
 
 " ABBREVIATIONS
 abbrev shebang #!/usr/bin/env bash
@@ -180,9 +181,6 @@ augroup vimrc
     autocmd QuickFixCmdPost * botright copen 8
 augroup END
 
-" noremap <C-c> :cclose<CR>
-noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
-
 
 " GENERAL PROGRAMMING
 " enable indentation by filetype
@@ -233,4 +231,29 @@ endfunction
 autocmd Filetype markdown noremap <F5> :AsyncRun -raw=1 @ pandoc <C-r>% -o <C-r>%.pdf && pkill -1 mupdf<CR><CR>
 autocmd Filetype rmd noremap <F5> :AsyncRun -raw=1 @ Rscript -e "require('rmarkdown'); render('<C-r>%')" && pkill -1 mupdf<CR><CR>
  
+" ALE configuration
+" ale enabled
+let g:ale_enabled = 1
+" Autofix issues on save
+let g:ale_fix_on_save = 0
+" disable ALE completion
+let g:ale_completion_enabled = 0
+" Lint only after save
+let g:ale_lint_on_text_changed = 'never'
+" warnign and error signs
+let g:ale_sign_error = '->'
+let g:ale_sign_warning = '--'
+" select used linters
+let g:ale_linters = {'python': ['flake8']}
+" select used fixers
+let g:ale_fixers = {'python': ['autopep8', 'isort', 'yapf', 'remove_trailing_lines', 'trim_whitespace']}
 
+nnoremap <leader>n :ALENextWrap<CR>
+nnoremap <leader>N :ALEPreviousWrap<CR>
+nnoremap <leader>gg :ALEFirst<CR>
+nnoremap <leader>G :ALELast<CR>
+nnoremap <leader>f :ALEFix<CR>
+
+" PYTHON
+autocmd Filetype python noremap <F5> :AsyncRun python % <CR>
+noremap <F7> :call asyncrun#quickfix_toggle(8)<cr>
