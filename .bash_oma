@@ -43,12 +43,10 @@ alias reload-bash=". ~/.bash_oma"
 # These options are here to prevent serious fuckup
 alias rename="perl-rename -ibvVt"
 alias utcdate="TZ=utc date"
-alias cal="cal | grep --color -EC6 '\b$(date +%e | sed "s/ //g")'"
+alias cal="cal | grep --color -EC6 ' \b$(date +%e | sed "s/ //g") '"
 alias regmac="echo [0-9a-f]{2}:[0-9a-f]{2}:[0-9a-f]{2}:[0-9a-f]{2}:[0-9a-f]{2}:[0-9a-f]{2}"
 alias regemail="echo '[^[:space:]]+@[^[:space:]]+'"
 alias regip="echo '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'"
-alias ranger='ranger --choosedir=$HOME/.config/rangerdir; LASTDIR=`cat $HOME/.config/rangerdir`; cd "$LASTDIR"'
-alias rg='ranger --choosedir=$HOME/.config/rangerdir; LASTDIR=`cat $HOME/.config/rangerdir`; cd "$LASTDIR"'
 alias R="R --quiet --no-save"
 alias v="vim"
 # bumblebee aliases
