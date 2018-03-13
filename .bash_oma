@@ -1,7 +1,5 @@
 # add this to the end of .bashrc: source /home/masi/.bash_oma
 
-echo "sourcing ~/.bash_oma"
-
 # enable vi mode
 # set -o vi
 
