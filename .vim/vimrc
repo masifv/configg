@@ -43,7 +43,7 @@ colorscheme happy_hacking
 set splitbelow
 " open new splits to the right
 set splitright
-" set relative numbering
+" set line numbers
 set nu
 " use tabs instead of split windows
 set switchbuf=usetab,newtab
@@ -53,16 +53,13 @@ set showcmd
 set scrolloff=5
 " start searching while typing
 set incsearch
-" disable command history window (quickfix)
-" noremap q: <NOP>
 " Enable mouse
 set mouse=a
-" highlight cursor
-" set cursorline
 " disable search highlighting by default
 set nohlsearch
-" for ranger
+" for ranger 
 silent !stty -ixon
+
 
 " KEY MAPPINGS
 nnoremap <Left> :echoe "Use h"<CR>
@@ -108,6 +105,9 @@ nnoremap g} }gel
 nnoremap g{ {w
 " use F3 to quickly count document/selection words, lines and characters
 :map <F3> :w ! echo "Lines, words, characters: $(wc -lwm)"<CR>
+" ranger style marks
+nnoremap ' :<C-u>marks<CR>:normal! `
+nnoremap m :<C-u>marks<CR>:normal! m
 
 
 " SPELL CHECKING
@@ -127,6 +127,7 @@ highlight SpellRare ctermfg=Magenta term=underline guisp=bg gui=undercurl ctermb
 " this should be somehere in bash specific configurations
 let @v = 'Ivariable=$lys$)0'
 let @p = 'Iprintlys$)0'
+
 
 " ABBREVIATIONS
 abbrev shebang #!/usr/bin/env bash
@@ -164,7 +165,9 @@ vnoremap <Leader>ct y:ThesaurusQueryReplace <C-r>"<CR>
 
 " FZF
 " nnoremap <silent> <C-p> :Files <CR>
-" CtrlP?
+
+
+" CtrlP
 let g:ctrlp_max_height = 25
 let g:ctrlp_cmd = 'CtrlPLastMode'
 " Use cache for CtrlP
@@ -173,8 +176,6 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
-
-
 
 
 " ASYNCRUN
@@ -262,3 +263,5 @@ noremap <F7> :call asyncrun#quickfix_toggle(8)<cr>
 
 " R
 autocmd Filetype r noremap <F5> :AsyncRun Rscript % <CR>
+
+
