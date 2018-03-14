@@ -2,23 +2,29 @@
 
 # vim
 mkdir -p ~/.vim
-mv ~/.vim/vimrc ~/.vim/vimrc_bak && ln -s $(pwd)/.vim/vimrc ~/.vim/vimrc
+mv ~/.vim/vimrc ~/.vim/vimrc_bak; ln -s $(pwd)/.vim/vimrc ~/.vim/vimrc
 
-#zsh
-mv ~/.zshrc.local ~/.zshrc.local_bak && ln -s $(pwd)/.zshrc.local ~/.zshrc.local
+# zsh
+# mv ~/.zshrc.local ~/.zshrc.local_bak; ln -s $(pwd)/.zshrc.local ~/.zshrc.local
+
+# bash
+mv ~/.bash_oma ~/.bash_oma_bak; ln -s $(pwd)/.bash_oma ~/.bash_oma
+
+# feh
+mv ~/.config/feh/keys ~/.config/feh/keys_bak; ln -s $(pwd)/.config/feh/keys ~/.config/feh/keys
 
 # ranger
 mkdir -p ~/.trash
 mkdir -p ~/.config/ranger
 touch ~/.config/rangerdir
-mv ~/.config/ranger/commands.py ~/.config/ranger/commands.py_bak && ln -s $(pwd)/.config/ranger/commands.py ~/.config/ranger/commands.py
-mv ~/.config/ranger/rc.conf ~/.config/ranger/rc.conf_bak && ln -s $(pwd)/.config/ranger/rc.conf ~/.config/ranger/rc.conf
-mv ~/.config/ranger/rifle.conf ~/.config/ranger/rifle.conf_bak && ln -s $(pwd)/.config/ranger/rifle.conf ~/.config/ranger/rifle.conf
+mv ~/.config/ranger/commands.py ~/.config/ranger/commands.py_bak; ln -s $(pwd)/.config/ranger/commands.py ~/.config/ranger/commands.py
+mv ~/.config/ranger/rc.conf ~/.config/ranger/rc.conf_bak; ln -s $(pwd)/.config/ranger/rc.conf ~/.config/ranger/rc.conf
+mv ~/.config/ranger/rifle.conf ~/.config/ranger/rifle.conf_bak; ln -s $(pwd)/.config/ranger/rifle.conf ~/.config/ranger/rifle.conf
 
 # i3
 mkdir -p ~/.i3/scripts
-mv ~/.i3status.conf ~/.i3status.conf_bak && ln -s $(pwd)/.i3status.conf ~/.i3status.conf
-mv ~/.i3/config ~/.i3/config_bak && ln -s $(pwd)/.i3/config ~/.i3/config
-mv ~/.i3/scripts/ws_switcher  ~/.i3/scripts/ws_switcher_bak && ln -s $(pwd)/.i3/scripts/ws_switcher ~/.i3/scripts/ws_switcher 
-mv ~/.config/compton.conf ~/.config/compton.conf_bak && ln -s $(pwd)/.config/compton.conf ~/.config/compton.conf
+mv ~/.i3status.conf ~/.i3status.conf_bak; ln -s $(pwd)/.i3status.conf ~/.i3status.conf
+mv ~/.i3/config ~/.i3/config_bak; ln -s $(pwd)/.i3/config ~/.i3/config
+mv ~/.i3/scripts/ws_switcher  ~/.i3/scripts/ws_switcher_bak; ln -s $(pwd)/.i3/scripts/ws_switcher ~/.i3/scripts/ws_switcher 
+mv ~/.config/compton.conf ~/.config/compton.conf_bak; ln -s $(pwd)/.config/compton.conf ~/.config/compton.conf
 
