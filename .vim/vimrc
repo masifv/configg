@@ -2,15 +2,15 @@
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 call plug#begin('~/.vim/plugged')
-
 " Make sure you use single quotes
-
 " surround
 Plug 'git://github.com/tpope/vim-surround.git'
 " commentary
 Plug 'git://github.com/tpope/vim-commentary.git'
 " indent-object
 Plug 'https://github.com/michaeljsmith/vim-indent-object.git'
+" Repeat
+Plug 'https://github.com/tpope/vim-repeat.git'
 " happy_hacking colorscheme
 Plug 'https://github.com/YorickPeterse/happy_hacking.vim.git'
 " AsyncRun
@@ -21,20 +21,26 @@ Plug 'https://github.com/terryma/vim-smooth-scroll.git'
 Plug 'https://github.com/junegunn/goyo.vim.git'
 " Thesaurus query plugin for synonyms
 Plug 'ron89/thesaurus_query.vim'
-" fzf
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
 " CtrlP file search plugin - a faster alternative is fzf
 Plug 'https://github.com/kien/ctrlp.vim.git'
-" Repeat
-Plug 'https://github.com/tpope/vim-repeat.git'
 " ALE
 Plug 'https://github.com/w0rp/ale.git'
-
+" NERDTree - File browser
+Plug 'https://github.com/scrooloose/nerdtree.git'
+" Git support for NERDTree
+Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin.git'
+" Tagbar - disaply tags on a side pane
+Plug 'https://github.com/majutsushi/tagbar.git'
+" Gutentags - automatic tags generation
+Plug 'https://github.com/ludovicchabant/vim-gutentags.git'
+" Python autocomplete
+Plug 'maralla/completor.vim'
 call plug#end()"
 
+"
+" GENERAL CONFIGS
+"
 
-" GENERAL SETTINGS
 " screen-256color had ctrl+left & ctrl+right mapped to deleting 5 rows
 set term=xterm-256color
 " set happy_hacking colorcheme
@@ -60,8 +66,7 @@ set nohlsearch
 " for ranger 
 silent !stty -ixon
 
-
-" KEY MAPPINGS
+" key mappings
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
@@ -92,7 +97,7 @@ set wildmenu
 " buffer navigation
 nnoremap <leader>k :bprevious<CR>
 nnoremap <leader>j :bnext<CR>
-nmap <Leader>x :bd<CR> 
+nmap <Leader>q :bd<CR> 
 " split navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -100,108 +105,23 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 " quickly edit vimrc 
 nnoremap <leader>e :e $MYVIMRC<CR>
-"go to the end of last line of paragraph
+"go to the end of last line of current paragraph
 nnoremap g} }gel
 nnoremap g{ {w
 " use F3 to quickly count document/selection words, lines and characters
 :map <F3> :w ! echo "Lines, words, characters: $(wc -lwm)"<CR>
 " ranger style marks
-nnoremap ' :<C-u>marks<CR>:normal! `
-nnoremap m :<C-u>marks<CR>:normal! m
-
-
-" SPELL CHECKING
-" toggle VIM's spell checking
-nnoremap <leader>s :setlocal spell! spelllang=en_us<CR>
-hi SpellBad cterm=underline
-hi SpellCap cterm=underline 
-hi SpellRare cterm=underline 
-hi SpellLocal cterm=underline 
-highlight SpellBad ctermfg=Red term=Reverse guisp=bg gui=undercurl ctermbg=Red
-highlight SpellCap ctermfg=Green term=Reverse guisp=bg gui=undercurl ctermbg=Cyan
-highlight SpellLocal ctermfg=Cyan term=Underline guisp=bg gui=undercurl ctermbg=Green
-highlight SpellRare ctermfg=Magenta term=underline guisp=bg gui=undercurl ctermbg=White
-
-
-" MACROS 
-" this should be somehere in bash specific configurations
-let @v = 'Ivariable=$lys$)0'
-let @p = 'Iprintlys$)0'
-
-
-" ABBREVIATIONS
-abbrev shebang #!/usr/bin/env bash
-abbrev lipsum Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-
-
-" SMOOTH SCROLL 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 2, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 2, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-
-
-" GOYO SETTINGS
-function! s:goyo_enter()
-  " Smaller top and bottom margins!
-  set noshowcmd
-  set scrolloff=999
-endfunction
-
-function! s:goyo_leave()
-  set showcmd
-  set scrolloff=5
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-
-" THESAURUS QUERY
-" Tip: use <C-x><C-u> to autocomplete using Thesaurus in insert mode
-nnoremap <Leader>ct :ThesaurusQueryReplaceCurrentWord<CR>
-vnoremap <Leader>ct y:ThesaurusQueryReplace <C-r>"<CR>
-
-
-" FZF
-" nnoremap <silent> <C-p> :Files <CR>
-
-
-" CtrlP
-let g:ctrlp_max_height = 25
-let g:ctrlp_cmd = 'CtrlPLastMode'
-" Use cache for CtrlP
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-" use faster ag for searching
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
-
-" ASYNCRUN
-augroup vimrc
-    autocmd QuickFixCmdPost * botright copen 8
-augroup END
-
-
-" GENERAL PROGRAMMING
-" enable indentation by filetype
-filetype plugin indent on
-" enable syntax highlighting
-syntax on
-" set colorcolumn at 79 charcters
-" highlight ColorColumn ctermbg=238 guibg=#2c2d27
-" let &colorcolumn=join(range(81,999),",")
-" use 4 spaces instead of tabs
-set expandtab
-set tabstop=4
-" indent with 4 spaces instead of 8
-set shiftwidth=4
-
+nnoremap C-' :<C-u>marks<CR>:normal! `
+nnoremap C-m :<C-u>marks<CR>:normal! m
+" effortless copy to clipboard
+nnoremap <leader>c "+y
+nnoremap <leader>v "+p
+vnoremap <leader>c "+y
+vnoremap <leader>v "+p
+" close quickfix with esc
+autocmd FileType qf nnoremap <buffer><silent> <esc> :quit<cr>
 
 " CUSTOM / SEARCH FUNCTIONALITY
-" toggle different modes with f4
-nnoremap <silent> <F4> :call <SID>SearchMode()<CR>
 function s:SearchMode()
   if !exists('s:searchmode') || s:searchmode == 0
     echo 'Search next: scroll hit to middle if not on same page'
@@ -220,20 +140,102 @@ function s:SearchMode()
     let s:searchmode = 0
   endif
 endfunction
-
 " If cursor is in first or last line of window, scroll to middle line.
 function s:MaybeMiddle()
   if winline() == 1 || winline() == winheight(0)
     normal! zz
   endif
 endfunction
+" toggle different modes with f4
+nnoremap <silent> <F4> :call <SID>SearchMode()<CR>
 
-" MARKDOWN
-" Render markdown files in the background and refresh mupdf
-autocmd Filetype markdown noremap <F5> :AsyncRun -raw=1 @ pandoc <C-r>% -o <C-r>%.pdf && pkill -1 mupdf<CR><CR>
-autocmd Filetype rmd noremap <F5> :AsyncRun -raw=1 @ Rscript -e "require('rmarkdown'); render('<C-r>%')" && pkill -1 mupdf<CR><CR>
- 
-" ALE configuration
+" SPELL CHECKING
+" toggle VIM's spell checking
+nnoremap <leader>s :setlocal spell! spelllang=en_us<CR>
+hi SpellBad cterm=underline
+hi SpellCap cterm=underline 
+hi SpellRare cterm=underline 
+hi SpellLocal cterm=underline 
+highlight SpellBad ctermfg=Red term=Reverse guisp=bg gui=undercurl ctermbg=Red
+highlight SpellCap ctermfg=Green term=Reverse guisp=bg gui=undercurl ctermbg=Cyan
+highlight SpellLocal ctermfg=Cyan term=Underline guisp=bg gui=undercurl ctermbg=Green
+highlight SpellRare ctermfg=Magenta term=underline guisp=bg gui=undercurl ctermbg=White
+
+" MACROS 
+" this should be somehere in bash specific configurations
+let @v = 'Ivariable=$lys$)0'
+let @p = 'Iprintlys$)0'
+
+" ABBREVIATIONS
+abbrev shebang #!/usr/bin/env bash
+abbrev lipsum Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+
+"
+" GENERAL PROGRAMMING
+"
+
+" enable indentation by filetype
+filetype plugin indent on
+" enable syntax highlighting
+syntax on
+" use 4 spaces instead of tabs
+set expandtab
+set tabstop=4
+" indent with 4 spaces instead of 8
+set shiftwidth=4
+
+" QUICKFIX AURTOMATIC RESIZE
+autocmd FileType qf call AdjustWindowHeight(3, 10)
+function! AdjustWindowHeight(minheight, maxheight)
+  exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+endfunction
+
+"
+" PLUGIN CONFIGRATIONS
+"
+
+" ASYNCRUN
+augroup vimrc
+    autocmd QuickFixCmdPost * botright copen 8
+augroup END
+
+" SMOOTH SCROLL 
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 2, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 2, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+" GOYO SETTINGS
+function! s:goyo_enter()
+  " Smaller top and bottom margins!
+  set noshowcmd
+  set scrolloff=999
+endfunction
+" 
+function! s:goyo_leave()
+  set showcmd
+  set scrolloff=5
+endfunction
+" 
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+" THESAURUS QUERY
+" Tip: use <C-x><C-u> to autocomplete using Thesaurus in insert mode
+nnoremap <Leader>t :ThesaurusQueryReplaceCurrentWord<CR>
+vnoremap <Leader>t y:ThesaurusQueryReplace <C-r>"<CR>
+
+" CTRLP
+let g:ctrlp_max_height = 25
+let g:ctrlp_cmd = 'CtrlPLastMode'
+" Use cache for CtrlP
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" use faster ag for searching
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" ALE 
 " ale enabled
 let g:ale_enabled = 1
 " Autofix issues on save
@@ -243,18 +245,29 @@ let g:ale_completion_enabled = 0
 " Lint only after save
 let g:ale_lint_on_text_changed = 'never'
 " warnign and error signs
-let g:ale_sign_error = '->'
-let g:ale_sign_warning = '--'
+let g:ale_sign_error = '--'
+let g:ale_sign_warning = '-'
 " select used linters
 let g:ale_linters = {'python': ['flake8']}
 " select used fixers
 let g:ale_fixers = {'python': ['autopep8', 'isort', 'yapf', 'remove_trailing_lines', 'trim_whitespace']}
-
+" ale keybinds
 nnoremap <leader>n :ALENextWrap<CR>
 nnoremap <leader>N :ALEPreviousWrap<CR>
 nnoremap <leader>gg :ALEFirst<CR>
 nnoremap <leader>G :ALELast<CR>
 nnoremap <leader>f :ALEFix<CR>
+
+" NERDTREE
+nnoremap <leader>x :NERDTreeToggle<CR>
+vnoremap <leader>x :NERDTreeToggle<CR>
+
+" TAGBAR
+nnoremap <leader>z :TagbarToggle<CR>
+
+"
+"LANGUAGE SPECIFIC CONFIGS
+"
 
 " PYTHON
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
@@ -264,4 +277,7 @@ noremap <F7> :call asyncrun#quickfix_toggle(8)<cr>
 " R
 autocmd Filetype r noremap <F5> :AsyncRun Rscript % <CR>
 
-
+" MARKDOWN
+" Render markdown files in the background and refresh mupdf
+autocmd Filetype markdown noremap <F5> :AsyncRun -raw=1 @ pandoc <C-r>% -o <C-r>%.pdf && pkill -1 mupdf<CR><CR>
+autocmd Filetype rmd noremap <F5> :AsyncRun -raw=1 @ Rscript -e "require('rmarkdown'); render('<C-r>%')" && pkill -1 mupdf<CR><CR>
