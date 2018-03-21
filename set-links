@@ -11,7 +11,7 @@ mv ~/.vim/vimrc ~/.vim/vimrc_bak; ln -s $(pwd)/.vim/vimrc ~/.vim/vimrc
 mv ~/.bash_oma ~/.bash_oma_bak; ln -s $(pwd)/.bash_oma ~/.bash_oma
 
 # feh
-mv ~/.config/feh/keys ~/.config/feh/keys_bak; ln -s $(pwd)/.config/feh/keys ~/.config/feh/keys
+mv ~/.config/feh/keys ~/.config/feh/keys_bak; mkdir -p ~/.config/feh; ln -s $(pwd)/.config/feh/keys ~/.config/feh/keys
 
 # ranger
 mkdir -p ~/.trash
