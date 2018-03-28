@@ -4,37 +4,37 @@
 call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 " surround
-Plug 'git://github.com/tpope/vim-surround.git'
+Plug 'tpope/vim-surround'
 " commentary
-Plug 'git://github.com/tpope/vim-commentary.git'
-" indent-object
-Plug 'https://github.com/michaeljsmith/vim-indent-object.git'
+Plug 'tpope/vim-commentary'
 " Repeat
-Plug 'https://github.com/tpope/vim-repeat.git'
+Plug 'tpope/vim-repeat'
+" indent-object
+Plug 'michaeljsmith/vim-indent-object'
 " happy_hacking colorscheme
-Plug 'https://github.com/YorickPeterse/happy_hacking.vim.git'
+Plug 'YorickPeterse/happy_hacking.vim'
 " AsyncRun
-Plug 'https://github.com/skywind3000/asyncrun.vim.git'
+Plug 'skywind3000/asyncrun.vim'
 " smooth scroller
-Plug 'https://github.com/terryma/vim-smooth-scroll.git'
+Plug 'terryma/vim-smooth-scroll'
 " Goyo distraction free writing plugin
-Plug 'https://github.com/junegunn/goyo.vim.git'
+Plug 'junegunn/goyo.vim'
 " Thesaurus query plugin for synonyms
 Plug 'ron89/thesaurus_query.vim'
 " CtrlP file search plugin - a faster alternative is fzf
-Plug 'https://github.com/kien/ctrlp.vim.git'
+Plug 'kien/ctrlp.vim'
 " ALE
-Plug 'https://github.com/w0rp/ale.git'
+Plug 'w0rp/ale'
 " NERDTree - File browser
-Plug 'https://github.com/scrooloose/nerdtree.git'
+Plug 'scrooloose/nerdtree'
 " Git support for NERDTree
-Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin.git'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " Tagbar - disaply tags on a side pane
-Plug 'https://github.com/majutsushi/tagbar.git'
+" Plug 'majutsushi/tagbar'
 " Gutentags - automatic tags generation
-Plug 'https://github.com/ludovicchabant/vim-gutentags.git'
+" Plug 'ludovicchabant/vim-gutentags'
 " Python autocomplete
-Plug 'maralla/completor.vim'
+" Plug 'maralla/completor.vim'
 call plug#end()"
 
 "
@@ -42,7 +42,7 @@ call plug#end()"
 "
 
 " screen-256color had ctrl+left & ctrl+right mapped to deleting 5 rows
-set term=xterm-256color
+" set term=xterm-256color
 " set happy_hacking colorcheme
 colorscheme happy_hacking
 " open new splits below
@@ -111,8 +111,8 @@ nnoremap g{ {w
 " use F3 to quickly count document/selection words, lines and characters
 :map <F3> :w ! echo "Lines, words, characters: $(wc -lwm)"<CR>
 " ranger style marks
-nnoremap C-' :<C-u>marks<CR>:normal! `
-nnoremap C-m :<C-u>marks<CR>:normal! m
+" nnoremap <C-'> :<C-u>marks<CR>:normal! `
+" nnoremap C-m :<C-u>marks<CR>:normal! m
 " effortless copy to clipboard
 nnoremap <leader>c "+y
 nnoremap <leader>v "+p
@@ -120,6 +120,10 @@ vnoremap <leader>c "+y
 vnoremap <leader>v "+p
 " close quickfix with esc
 autocmd FileType qf nnoremap <buffer><silent> <esc> :quit<cr>
+" quicker surround
+nnoremap <leader>w ysiw
+nnoremap <leader>W ysiW
+
 
 " CUSTOM / SEARCH FUNCTIONALITY
 function s:SearchMode()
@@ -148,6 +152,11 @@ function s:MaybeMiddle()
 endfunction
 " toggle different modes with f4
 nnoremap <silent> <F4> :call <SID>SearchMode()<CR>
+" default search mode: scroll hit to middle
+nnoremap n nzz<BS><Space>
+nnoremap N Nzz<BS><Space>
+let s:searchmode = 2
+
 
 " SPELL CHECKING
 " toggle VIM's spell checking
@@ -185,9 +194,9 @@ set tabstop=4
 set shiftwidth=4
 
 " QUICKFIX AURTOMATIC RESIZE
-autocmd FileType qf call AdjustWindowHeight(3, 10)
+autocmd FileType qf call AdjustWindowHeight(3, 30)
 function! AdjustWindowHeight(minheight, maxheight)
-  exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+  exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
 "
@@ -273,6 +282,9 @@ nnoremap <leader>z :TagbarToggle<CR>
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype python noremap <F5> :AsyncRun python % <CR>
 noremap <F7> :call asyncrun#quickfix_toggle(8)<cr>
+" insert pudb/ipdb breakpoints
+nnoremap <leader>b Oimport ipdb; ipdb.set_trace()^^
+nnoremap <leader>B oimport pudb; pudb.set_trace()^^
 
 " R
 autocmd Filetype r noremap <F5> :AsyncRun Rscript % <CR>
