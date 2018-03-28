@@ -42,6 +42,9 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $terminal
 
+# start a floating terminal
+bindsym $mod+Shift+Return exec --no-startup-id $terminal --name=floating-term
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -159,10 +162,9 @@ assign [class="jetbrains-pycharm-ce"] 10
 
 # floating windows
 for_window [class="Pavucontrol"] floating enable
+for_window [class="Termite" instance="R-term"] floating enable
+for_window [class="Termite" instance="floating-term"] floating enable
 
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -176,16 +178,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym $left       resize shrink width 30 px or 30 ppt
+        bindsym $down       resize grow height 30 px or 30 ppt
+        bindsym $up         resize shrink height 30 px or 30 ppt
+        bindsym $right      resize grow width 30 px or 30 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+        # if necessary, fine-tune with arrow keys
+        bindsym Left        resize shrink width 5 px or 5 ppt
+        bindsym Down        resize grow height 5 px or 5 ppt
+        bindsym Up          resize shrink height 5 px or 5 ppt
+        bindsym Right       resize grow width 5 px or 5 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -255,7 +257,7 @@ bindsym $mod+Shift+v exec --no-startup-id pavucontrol -t 3
 
 # wifi select
 bindsym F2 exec --no-startup-id networkmanager_dmenu
-bindsym $mod+Shift+w exec --no-startup-id networkmanager_dmenu
+bindsym $mod+Shift+z exec --no-startup-id networkmanager_dmenu
 
 # screenshot
 bindsym Print exec --no-startup-id "maim | xclip -selection clipboard -t image/png; notify-send -t 1 Screenshot"
@@ -283,6 +285,13 @@ bindsym $mod+Shift+m exec --no-startup-id random-wallpaper
 # headphones
 bindsym $mod+Shift+comma exec --no-startup-id connect-P7
 bindsym $mod+Shift+period exec --no-startup-id disconnect-P7
+
+# translate
+bindsym $mod+Shift+s exec --no-startup-id "google-chrome-stable http://www.sanakirja.org/"
+
+# calculator
+bindsym $mod+Shift+c exec --no-startup-id $terminal --name=R-term -e "R --quiet --no-save"
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -321,6 +330,9 @@ exec --no-startup-id volumeicon -d "HDA Intel PCH"
 
 # desktop wallpaper
 exec --no-startup-id ~/bin/random-wallpaper
+
+# desktop wallpaper
+exec --no-startup-id ~/bin/xflux-leiden
 
 client.focused #4F99D3 #4F99D3 #151718 #9FCA56
 client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
