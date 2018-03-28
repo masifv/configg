@@ -62,8 +62,8 @@ alias tgi="git"
 # linux
 alias git-visualize="git-big-picture -a -v google-chrome-stable ."
 
-export PATH=${PATH}:${HOME}/bin:${HOME}/bin/radios
-#export PATH=${PATH}:${HOME}/bin:${HOME}/bin/radios:/var/lib/snapd/snap/bin
+# export PATH=${PATH}:${HOME}/bin:${HOME}/bin/radios
+export PATH=${PATH}:${HOME}/bin:${HOME}/bin/radios:/var/lib/snapd/snap/bin
 export DROPBOXPATH="/home/masi/Dropbox"
 export DROPBOXURL="https://dl.dropbox.com/u/10042245/"
 export EDITOR=vim
