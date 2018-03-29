@@ -163,7 +163,7 @@ assign [class="jetbrains-pycharm-ce"] 10
 # floating windows
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Termite" instance="R-term"] floating enable
-for_window [class="Termite" instance="floating-term"] floating enable
+for_window [class="Termite" instance="floating-term"] floating enable resize grow left 250, resize grow right 250, resize grow down 180, resize grow up 180, move down 15
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
