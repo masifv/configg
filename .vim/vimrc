@@ -123,7 +123,10 @@ autocmd FileType qf nnoremap <buffer><silent> <esc> :quit<cr>
 " quicker surround
 nnoremap <leader>w ysiw
 nnoremap <leader>W ysiW
-
+" disable ex-mode
+nnoremap Q <NOP>
+" reduce some more frustration
+nnoremap q: <NOP>
 
 " CUSTOM / SEARCH FUNCTIONALITY
 function s:SearchMode()
