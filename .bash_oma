@@ -48,6 +48,7 @@ alias regemail="echo '[^[:space:]]+@[^[:space:]]+'"
 alias regip="echo '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'"
 alias R="R --quiet --no-save"
 alias v="nvim"
+alias feh="feh --scale-down --keep-zoom-vp"
 # bumblebee aliases
 alias nvidia-settings='primusrun nvidia-settings -c :8'
 # pacman typo aliases
