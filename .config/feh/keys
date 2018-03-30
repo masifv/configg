@@ -16,11 +16,10 @@ scroll_down_page	C-j
 toggle_aliasing		a
 toggle_actions		S-A
 toggle_filenames	i
-toogle_keep_vp      S-K
+toggle_keep_vp      S-k
 toggle_fullscreen   f
-
 # this is needed for the toggle_fullscren to work
-save_filelist       S-S
+save_filelist       C-S 
 
 zoom_in		plus
 zoom_out	minus
