@@ -181,6 +181,23 @@ let @p = 'Iprintlys$)0'
 " ABBREVIATIONS
 abbrev shebang #!/usr/bin/env bash
 abbrev lipsum Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+abbrev slurmheader 
+\<CR>#!/bin/bash
+\<CR>#
+\<CR>#SBATCH -J prepmasks
+\<CR>#
+\<CR>#SBATCH --output=logs/prepmasks_%j.txt
+\<CR>#SBATCH --error=logs/prepmasks_%j.txt
+\<CR>#
+\<CR>#SBATCH --mail-user=
+\<CR>#SBATCH --mail-type=END
+\<CR>#
+\<CR>#SBATCH --ntasks=16
+\<CR>#
+\<CR># time format hours:minutes:seconds or days-hours
+\<CR>#SBATCH --time=4:00:00
+\<CR>#SBATCH --mem=50000
+\<CR>#SBATCH --partition=normal
 
 "
 " GENERAL PROGRAMMING
