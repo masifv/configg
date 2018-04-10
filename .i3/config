@@ -69,10 +69,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+$left move left 30
+bindsym $mod+Shift+$down move down 30
+bindsym $mod+Shift+$up move up 30
+bindsym $mod+Shift+$right move right 30
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -157,12 +157,14 @@ bindsym $mod+Shift+0 move container to workspace number 10
 assign [class="Thunderbird"] 3
 assign [class="TelegramDesktop"] 9
 assign [class="Slack"] 9
-assign [class="Spotify"] 8
 assign [class="jetbrains-pycharm-ce"] 10
+# spotify needs special treatment
+for_window [class="Spotify"] move to workspace 8
 
 # floating windows
 for_window [class="Pavucontrol"] floating enable
-for_window [class="Termite" instance="R-term"] floating enable
+for_window [class="Termite" instance="R-term"] floating enable 
+for_window [class="Termite" instance="python-term"] floating enable 
 for_window [class="Termite" instance="floating-term"] floating enable resize grow left 250, resize grow right 250, resize grow down 180, resize grow up 180, move down 15
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -178,10 +180,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 30 px or 30 ppt
-        bindsym $down       resize grow height 30 px or 30 ppt
-        bindsym $up         resize shrink height 30 px or 30 ppt
-        bindsym $right      resize grow width 30 px or 30 ppt
+        bindsym $left       resize shrink width 40 px or 5 ppt
+        bindsym $down       resize grow height 40 px or 5 ppt
+        bindsym $up         resize shrink height 40 px or 5 ppt
+        bindsym $right      resize grow width 40 px or 5 ppt
 
         # if necessary, fine-tune with arrow keys
         bindsym Left        resize shrink width 5 px or 5 ppt
@@ -233,7 +235,9 @@ bindsym $mod+t exec --no-startup-id ~/bin/todo
 bindsym $mod+y exec --no-startup-id ~/bin/artific_todo
 
 # Pulse Audio controls
-# using application 'volumeicon'
+bindsym XF86AudioRaiseVolume exec --no-startup-id volume up
+bindsym XF86AudioLowerVolume exec --no-startup-id volume down
+bindsym XF86AudioMute exec --no-startup-id volume mute
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 2 # increase screen brightness
@@ -273,10 +277,7 @@ bindsym XF86TouchpadToggle exec --no-startup-id toggle_touchpad
 bindsym Control+Tab exec --no-startup-id google-chrome-stable
 
 # qutebrowser
-bindsym Control+section exec --no-startup-id qutebrowser
-
-# ranger
-bindsym Shift+$mod+f exec --no-startup-id $terminal -e rg
+bindsym Control+section exec --no-startup-id thunderbird
 
 # wallpaper
 bindsym $mod+Shift+n exec --no-startup-id bing-wallpaper
@@ -286,11 +287,16 @@ bindsym $mod+Shift+m exec --no-startup-id random-wallpaper
 bindsym $mod+Shift+comma exec --no-startup-id connect-P7
 bindsym $mod+Shift+period exec --no-startup-id disconnect-P7
 
+# quick googling
+bindsym $mod+x exec --no-startup-id google-dmenu
+
 # translate
 bindsym $mod+Shift+s exec --no-startup-id "google-chrome-stable http://www.sanakirja.org/"
 
 # calculator
 bindsym $mod+Shift+c exec --no-startup-id $terminal --name=R-term -e "R --quiet --no-save"
+# python
+bindsym $mod+Shift+p exec --no-startup-id $terminal --name=python-term -e "/home/masi/anaconda3/envs/test/bin/python3"
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -326,13 +332,16 @@ exec --no-startup-id "sh -c 'sleep 120; exec dropbox'"
 exec --no-startup-id nm-applet
 
 # tray icon for volume control
-exec --no-startup-id volumeicon -d "HDA Intel PCH"
+# exec --no-startup-id volumeicon -d "HDA Intel PCH"
 
 # desktop wallpaper
 exec --no-startup-id ~/bin/random-wallpaper
 
-# desktop wallpaper
+# reduce blue light at night
 exec --no-startup-id ~/bin/xflux-leiden
+
+# preload dmenu for quicker first run
+exec --no-startup-id dmenu_run && sleep 10 && pkill dmenu
 
 client.focused #4F99D3 #4F99D3 #151718 #9FCA56
 client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
