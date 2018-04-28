@@ -49,12 +49,11 @@ bindsym $mod+Shift+Return exec --no-startup-id $terminal --name=floating-term
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+Shift+d exec --no-startup-id dmenu_run -i
+# bindsym $mod+Shift+d exec --no-startup-id dmenu_run -i
+bindsym $mod+Shift+d exec --no-startup-id j4-dmenu-desktop --dmenu="(stest -flx $(echo $PATH | tr : ' ') | sort -u) | dmenu"
 
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i'
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i'
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu='dmenu -i'
 
 # change focus
 bindsym $mod+$left focus left
@@ -339,9 +338,6 @@ exec --no-startup-id ~/bin/random-wallpaper
 
 # reduce blue light at night
 exec --no-startup-id ~/bin/xflux-leiden
-
-# preload dmenu for quicker first run
-exec --no-startup-id dmenu_run && sleep 10 && pkill dmenu
 
 client.focused #4F99D3 #4F99D3 #151718 #9FCA56
 client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
