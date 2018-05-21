@@ -23,6 +23,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'ron89/thesaurus_query.vim'
 " CtrlP file search plugin - a faster alternative is fzf
 Plug 'kien/ctrlp.vim'
+" vimSum
+Plug 'wgurecky/vimSum'
 " ALE
 Plug 'w0rp/ale'
 " NERDTree - File browser
@@ -35,6 +37,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'ludovicchabant/vim-gutentags'
 " Python autocomplete
 " Plug 'maralla/completor.vim'
+" Python Semi-automatic imports
+" Plug 'dbsr/vimpy'
 call plug#end()"
 
 "
@@ -120,9 +124,6 @@ vnoremap <leader>c "+y
 vnoremap <leader>v "+p
 " close quickfix with esc
 autocmd FileType qf nnoremap <buffer><silent> <esc> :quit<cr>
-" quicker surround
-nnoremap <leader>w ysiw
-nnoremap <leader>W ysiW
 " disable ex-mode
 nnoremap Q <NOP>
 " reduce some more frustration
@@ -197,26 +198,47 @@ abbrev slurmheader #!/bin/bash
 \<CR>#SBATCH --time=4:00:00
 \<CR>#SBATCH --mem=50000
 \<CR>#SBATCH --partition=normal
+abbrev rmdheader ---
+\<CR>title: Title
+\<CR>output: pdf_document
+\<CR>---
+\<CR>
+\<CR>
 
 "
 " GENERAL PROGRAMMING
 "
 
 " enable indentation by filetype
-filetype plugin indent on
+" filetype plugin indent on
 " enable syntax highlighting
-syntax on
+" syntax on
 " use 4 spaces instead of tabs
-set expandtab
-set tabstop=4
-" indent with 4 spaces instead of 8
-set shiftwidth=4
+
+set expandtab           " enter spaces when tab is pressed
+set textwidth=120       " break lines when line length increases
+set tabstop=4           " use 4 spaces to represent tab
+set softtabstop=4
+set shiftwidth=4        " number of spaces to use for auto indent
+set autoindent          " copy indent from current line when starting a new line
+
+" make backspaces more powerfull
+set backspace=indent,eol,start
+
+set ruler 				" show line and column number
+syntax on               " syntax highlighting
+set showcmd             " show (partial) command in status line
+
 
 " QUICKFIX AURTOMATIC RESIZE
 autocmd FileType qf call AdjustWindowHeight(3, 30)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
+
+
+
+
 
 "
 " PLUGIN CONFIGRATIONS

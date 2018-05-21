@@ -60,6 +60,7 @@ alias regip="echo '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'"
 alias R="R --quiet --no-save"
 alias v="$EDITOR"
 alias rg='ranger --choosedir=$HOME/.config/rangerdir; LASTDIR=`cat $HOME/.config/rangerdir`; builtin cd "$LASTDIR"'
+alias gr='ranger --choosedir=$HOME/.config/rangerdir; LASTDIR=`cat $HOME/.config/rangerdir`; builtin cd "$LASTDIR"'
 # bumblebee aliases
 alias nvidia-settings='primusrun nvidia-settings -c :8'
 # pacman typo aliases
