@@ -1,5 +1,11 @@
 #!/usr/bin/env bash 
 
+# flag meanings
+# project (no flag):    Project configs are only available for the current project and stored in .git/config in the project's directory.
+# --global:             Global configs are available for all projects for the current user and stored in ~/.gitconfig.
+# --system:             System configs are available for all the users/projects and stored in /etc/gitconfig.
+
+
 git config --global push.default simple
 git config --global credential.helper cache
 git config --global alias.s "status"

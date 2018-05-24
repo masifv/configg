@@ -1,8 +1,32 @@
 #!/usr/bin/env bash 
 
+# execute lines individually by  :.w !bash   (use space between w and !)
+
+# ======= GENERAL ========
+
+# download neovim to software folder
+mkdir -p ~/software
+curl -Lo ~/software/nvim.appimage https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+ln -s ~/software/nvim.appimage ~/bin/vim
+# ln -s ~/software/nvim.appimage ~/bin/nvim
+
+# download ranger
+mkdir -p ~/software/ranger-1.9.1/
+curl -Lo ~/software/ranger.tar.gz "https://github.com/ranger/ranger/archive/v1.9.1.tar.gz"
+tar zxvf ~/software/ranger.tar.gz -C ~/software/ranger-1.9.1/
+rm ~/software/ranger.tar.gz 
+ln -s ~/software/ranger-1.9.1/ranger.py ~/bin/ranger
+
+
+# ======= SET LINKS ======
+
 # vim
 mkdir -p ~/.vim
 mv ~/.vim/vimrc ~/.vim/vimrc_bak; ln -s $(pwd)/.vim/vimrc ~/.vim/vimrc
+
+# nvim
+mkdir -p ~/.config/nvim
+mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim_bak; ln -s $(pwd)/.vim/vimrc ~/.config/nvim/init.vim
 
 # zsh
 # mv ~/.zshrc.local ~/.zshrc.local_bak; ln -s $(pwd)/.zshrc.local ~/.zshrc.local
@@ -11,7 +35,7 @@ mv ~/.vim/vimrc ~/.vim/vimrc_bak; ln -s $(pwd)/.vim/vimrc ~/.vim/vimrc
 mv ~/.bash_oma ~/.bash_oma_bak; ln -s $(pwd)/.bash_oma ~/.bash_oma
 
 # feh
-mv ~/.config/feh/keys ~/.config/feh/keys_bak; mkdir -p ~/.config/feh; ln -s $(pwd)/.config/feh/keys ~/.config/feh/keys
+# mv ~/.config/feh/keys ~/.config/feh/keys_bak; mkdir -p ~/.config/feh; ln -s $(pwd)/.config/feh/keys ~/.config/feh/keys
 
 # ranger
 mkdir -p ~/.trash
