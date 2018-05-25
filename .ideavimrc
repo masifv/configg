@@ -1,0 +1,33 @@
+let mapleader = " "
+
+nnoremap <leader>e :e /home/masi/.ideavimrc<CR>
+
+let @p = '^iprint(<Esc>A)<Esc>^'
+
+nnoremap :wq <Nop>
+nnoremap <PageDown> <Nop>
+nnoremap <PageUp> <Nop>
+
+set scrolloff=3
+
+" disable number incrementation
+nnoremap <C-a> <Nop>
+nnoremap <C-x> <Nop>
+
+nnoremap <leader>b oimport pdb; pdb.set_trace()^^
+nnoremap <leader>B oimport pudb; pudb.set_trace()^^
+
+" buffer navigation
+nnoremap <leader>k :bprevious<CR>
+nnoremap <leader>j :bnext<CR>
+nmap <Leader>q :q<CR>
+
+" go to next nonempty line
+" nnoremap <C-j> /^\S<cr>
+" nnoremap <C-k> ?^\S<cr>
+
+"go to the end of last line of current paragraph
+nnoremap g} }gel
+nnoremap g{ {w
+
+" nmap gcc :action CommentByLineComment<Cr>
