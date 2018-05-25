@@ -33,13 +33,18 @@ Plug 'scrooloose/nerdtree'
 " Git support for NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
 " Tagbar - disaply tags on a side pane
-" Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 " Gutentags - automatic tags generation
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 " Python autocomplete
-" Plug 'maralla/completor.vim'
-" Python Semi-automatic imports
-" Plug 'dbsr/vimpy'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 call plug#end()"
 
 "
@@ -126,6 +131,7 @@ nnoremap g{ {w
 " effortless copy to clipboard
 nnoremap <leader>c "+y
 nnoremap <leader>v "+p
+nnoremap <leader>V ggVG"+p
 vnoremap <leader>c "+y
 vnoremap <leader>v "+p
 " close quickfix with esc
@@ -136,13 +142,19 @@ nnoremap Q <NOP>
 nnoremap q: <NOP>
 " yank full path of current buffer (to system clipboard)
 " nnoremap <leader>yp :let @+ = expand("%:p")
+" Translate text with google translate
+nnoremap <leader>T :%!trans -b -no-ansi 2> /dev/null <CR>
+vnoremap <leader>T :%!trans -b -no-ansi 2> /dev/null <CR>
+" quick select all
+nnoremap <leader>a ggVG
+" quick search
+nnoremap <leader><CR> /
+" quick search
+nnoremap <leader><BS> ?
 " Disable number incrementing/ decrementing keys to prevent typos
 nnoremap <C-a> <NOP>
 nnoremap <C-x> <NOP>
-" for quick searching
-nnoremap <leader><CR> /
-" for quick searching
-nnoremap <leader><BS> ?
+
 
 " CUSTOM / SEARCH FUNCTIONALITY
 function s:SearchMode()
@@ -329,6 +341,10 @@ vnoremap <leader>x :NERDTreeToggle<CR>
 
 " TAGBAR
 nnoremap <leader>z :TagbarToggle<CR>
+
+" DEOPLETE
+let g:deoplete#enable_at_startup = 1
+
 
 "
 "LANGUAGE SPECIFIC CONFIGS
