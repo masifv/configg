@@ -37,6 +37,10 @@ mv ~/.bash_oma ~/.bash_oma_bak; ln -s $(pwd)/.bash_oma ~/.bash_oma
 # feh
 # mv ~/.config/feh/keys ~/.config/feh/keys_bak; mkdir -p ~/.config/feh; ln -s $(pwd)/.config/feh/keys ~/.config/feh/keys
 
+# ideavimrc
+mv ~/.ideavimrc ~/.ideavimrc_bak; ln -s $(pwd)/.ideavimrc ~/.ideavimrc
+
+
 # ranger
 mkdir -p ~/.trash
 mkdir -p ~/.config/ranger
