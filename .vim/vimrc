@@ -64,12 +64,17 @@ set showcmd
 set scrolloff=5
 " start searching while typing
 set incsearch
+" case insensitive searching
+set ignorecase
+" consider case when typing uppercase letters, otherwise case insensitive
+set smartcase
 " Enable mouse
 set mouse=a
 " disable search highlighting by default
 set nohlsearch
 " for ranger 
 silent !stty -ixon
+
 
 " key mappings
 nnoremap <Left> :echoe "Use h"<CR>
@@ -129,6 +134,15 @@ autocmd FileType qf nnoremap <buffer><silent> <esc> :quit<cr>
 nnoremap Q <NOP>
 " reduce some more frustration
 nnoremap q: <NOP>
+" yank full path of current buffer (to system clipboard)
+" nnoremap <leader>yp :let @+ = expand("%:p")
+" Disable number incrementing/ decrementing keys to prevent typos
+nnoremap <C-a> <NOP>
+nnoremap <C-x> <NOP>
+" for quick searching
+nnoremap <leader><CR> /
+" for quick searching
+nnoremap <leader><BS> ?
 
 " CUSTOM / SEARCH FUNCTIONALITY
 function s:SearchMode()
@@ -335,3 +349,6 @@ autocmd Filetype r noremap <F5> :AsyncRun Rscript % <CR>
 " Render markdown files in the background and refresh mupdf
 autocmd Filetype markdown noremap <F5> :AsyncRun -raw=1 @ pandoc <C-r>% -o <C-r>%.pdf && pkill -1 mupdf<CR><CR>
 autocmd Filetype rmd noremap <F5> :AsyncRun -raw=1 @ Rscript -e "require('rmarkdown'); render('<C-r>%')" && pkill -1 mupdf<CR><CR>
+
+" BASH
+autocmd Filetype sh noremap <F5> :AsyncRun bash % <CR>
