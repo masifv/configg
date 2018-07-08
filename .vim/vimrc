@@ -131,10 +131,10 @@ nnoremap g{ {w
 " nnoremap <C-'> :<C-u>marks<CR>:normal! `
 " nnoremap C-m :<C-u>marks<CR>:normal! m
 " effortless copy to clipboard
-nnoremap <leader>c "+y
+nnoremap <leader>c "+y :let @*=@+<cr>
 nnoremap <leader>v "+p
 nnoremap <leader>V ggVG"+p
-vnoremap <leader>c "+y
+vnoremap <leader>c "+y :let @*=@+<cr>
 vnoremap <leader>v "+p
 " close quickfix with esc
 autocmd FileType qf nnoremap <buffer><silent> <esc> :quit<cr>
