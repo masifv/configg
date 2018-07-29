@@ -61,8 +61,8 @@ class my_edit(Command):
         return self._tab_directory_content()
 
 
-class empty(Command):
-    """:empty
+class empty_trash(Command):
+    """:empty_trash
 
     Empties the trash directory ~/.trash
     """
