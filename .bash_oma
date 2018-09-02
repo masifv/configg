@@ -74,7 +74,8 @@ alias tgi="git"
 # OS X
 # alias git-visualize="git-big-picture -a -v /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome ."
 # linux
-alias git-visualize="git-big-picture -a -v google-chrome-stable ."
+# alias git-visualize="git-big-picture -a -v google-chrome-stable ."
+alias git-visualize="git-big-picture -a -f pdf -v google-chrome-stable . 2> /dev/null"
 
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[1;33m\]"
