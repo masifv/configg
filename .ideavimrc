@@ -31,3 +31,10 @@ nnoremap g} }gel
 nnoremap g{ {w
 
 " nmap gcc :action CommentByLineComment<Cr>
+
+" quick select all
+nnoremap <leader>a ggVG
+
+" quick searching
+nnoremap <leader><CR> /
+nnoremap <leader><BS> ?
